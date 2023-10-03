@@ -4,22 +4,33 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\cl.exe",
-			"args": [
-				"${file}",
-				"/I", "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.20348.0\\ucrt",
-				"/I", "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\include",
-                "/Foobj\\",
-                "/Febin\\${fileBasenameNoExtension}.exe",
-				"/link",
-				"/LIBPATH:C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\lib\\x64",
-				"/LIBPATH:C:\\Program Files (x86)\\Windows Kits\\10\\Lib\\10.0.20348.0\\ucrt\\x64",
-				"/LIBPATH:C:\\Program Files (x86)\\Windows Kits\\10\\Lib\\10.0.20348.0\\um\\x64"
-			],
+            "command": "cl.exe", // For Windows
+            "args": [
+                // ... your existing Windows args ...
+            ],
             "group": {
                 "kind": "build",
                 "isDefault": true
+            },
+            "windows": {
+                "command": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\cl.exe"
             }
+        },
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "gcc", // Default for macOS
+            "args": [
+                "${file}",
+                "lib/auxiliary.c",
+                "-o",
+                "bin/${fileBasenameNoExtension}"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "osx": {}
         }
     ]
 }
