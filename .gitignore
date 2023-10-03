@@ -1,0 +1,3 @@
+obj/*.obj
+bin/*.exe
+vc140.pdb
